@@ -32,22 +32,32 @@ const Dulceria = () => {
   const total = cart.reduce((sum, item) => sum + item.precio, 0);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Dulcería</h2>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">🍭 Dulcería</h1>
+
+      <div className="row">
         {candys.map((candy) => (
-          <div key={candy.id} style={{ border: '1px solid #ccc', padding: '10px', width: '200px' }}>
-            <h3>{candy.nombre}</h3>
-            <p>{candy.descripcion}</p>
-            <p>Precio: S/ {candy.precio.toFixed(2)}</p>
-            <button onClick={() => handleAddToCart(candy)}>Agregar</button>
+          <div key={candy.id} className="col-md-4 mb-4">
+            <div className="card shadow-sm h-100">
+              <div className="card-body text-center">
+                <h5 className="card-title">{candy.nombre}</h5>
+                <p className="card-text">{candy.descripcion}</p>
+                <p className="card-text"><strong>S/ {candy.precio.toFixed(2)}</strong></p>
+                <button className="btn btn-success" onClick={() => handleAddToCart(candy)}>
+                  Agregar
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
 
-      <div style={{ marginTop: '30px' }}>
-        <h3>Total: S/ {total.toFixed(2)}</h3>
-        <button onClick={handleContinue} style={{ padding: '10px 20px', marginTop: '10px' }}>
+      {/* Total y continuar */}
+      <div className="text-center mt-4">
+        <div className="alert alert-info" role="alert">
+          <h4>Total a pagar: S/ {total.toFixed(2)}</h4>
+        </div>
+        <button className="btn btn-primary btn-lg" onClick={handleContinue} disabled={cart.length === 0}>
           Continuar a Pago
         </button>
       </div>
